@@ -1,27 +1,7 @@
-# CLI To-Do App
-
-import json
-import os
-
-FILE_NAME = "tasks.json"
-
-# Load tasks from file
-
-def load_tasks():
-    if os.path.exists(FILE_NAME):
-        with open(FILE_NAME, "r") as file:
-            return json.load(file)
-    return []
-
-# Save tasks to file
-
-def save_tasks(tasks):
-    with open(FILE_NAME, "w") as file:
-        json.dump(tasks, file, indent=4)
+tasks = []
 
 # Display tasks
-
-def show_tasks(tasks):
+def show_tasks():
     if not tasks:
         print("\nNo tasks found.\n")
         return
@@ -32,74 +12,60 @@ def show_tasks(tasks):
         print(f"{index}. [{status}] {task['title']}")
     print()
 
-# Add a task
-
-def add_task(tasks):
+# Add task
+def add_task():
     title = input("Enter task: ")
     tasks.append({"title": title, "done": False})
-    save_tasks(tasks)
     print("Task added successfully!\n")
 
-# Mark task as complete
-
-def complete_task(tasks):
-    show_tasks(tasks)
+# Complete task
+def complete_task():
+    show_tasks()
 
     try:
         task_num = int(input("Enter task number to mark complete: "))
         tasks[task_num - 1]["done"] = True
-        save_tasks(tasks)
         print("Task marked as completed!\n")
     except (ValueError, IndexError):
         print("Invalid task number!\n")
 
-# Delete a task
-
-def delete_task(tasks):
-    show_tasks(tasks)
+# Delete task
+def delete_task():
+    show_tasks()
 
     try:
         task_num = int(input("Enter task number to delete: "))
         removed = tasks.pop(task_num - 1)
-        save_tasks(tasks)
         print(f"Deleted task: {removed['title']}\n")
     except (ValueError, IndexError):
         print("Invalid task number!\n")
 
-# Main program
+# Main menu
+while True:
+    print("===== CLI TO-DO APP =====")
+    print("1. View Tasks")
+    print("2. Add Task")
+    print("3. Complete Task")
+    print("4. Delete Task")
+    print("5. Exit")
 
-def main():
-    tasks = load_tasks()
+    choice = input("Choose an option: ")
 
-    while True:
-        print("===== CLI TO-DO APP =====")
-        print("1. View Tasks")
-        print("2. Add Task")
-        print("3. Complete Task")
-        print("4. Delete Task")
-        print("5. Exit")
+    if choice == "1":
+        show_tasks()
 
-        choice = input("Choose an option: ")
+    elif choice == "2":
+        add_task()
 
-        if choice == "1":
-            show_tasks(tasks)
+    elif choice == "3":
+        complete_task()
 
-        elif choice == "2":
-            add_task(tasks)
+    elif choice == "4":
+        delete_task()
 
-        elif choice == "3":
-            complete_task(tasks)
+    elif choice == "5":
+        print("Goodbye!")
+        break
 
-        elif choice == "4":
-            delete_task(tasks)
-
-        elif choice == "5":
-            print("Goodbye!")
-            break
-
-        else:
-            print("Invalid option! Try again.\n")
-
-if __name__ == "__main__":
-    main()
-
+    else:
+        print("Invalid option! Try again.\n")
