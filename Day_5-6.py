@@ -6,11 +6,11 @@
 
 # Removing Duplicates
 
-list = [1, 2, 2, 3, 4, 4, 5]
-u_list = []
+# list = [1, 2, 2, 3, 4, 4, 5]
+# u_list = []
 
-for item in list:
-    if item not in u_list:
-        u_list.append(item)
+# for item in list:
+#     if item not in u_list:
+#         u_list.append(item)
 
-print(u_list)
+# print(u_list)

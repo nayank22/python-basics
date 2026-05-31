@@ -1,7 +1,5 @@
 # CLI To-Do App
 
-print("---TO-DO APP---\n")
-
 import json
 import os
 
